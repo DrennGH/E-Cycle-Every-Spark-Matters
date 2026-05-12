@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find a Drop-Off Point — E-Cycle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">E<span>-</span>Cycle</a>
+    <a href="index.html" class="nav-back">Back to Campaign</a>
+  </nav>
+
+  <!-- HERO STRIP -->
+  <div class="hero-strip">
+    <div class="hero-strip-inner">
+      <div class="page-eyebrow">E-Waste Drop-Off Locator</div>
+      <h1 class="page-title">Find a <span>Drop-Off Point</span></h1>
+      <p class="page-sub">
+        Drop off your old devices at designated <strong>SM Cyberzone e-waste bins</strong> 
+        across Cavite — free, no registration needed, during regular mall hours.
+      </p>
+      <div class="chips">
+        <div class="chip">♻️ 7 Locations in Cavite</div>
+        <div class="chip orange">⚡ Free Drop-Off</div>
+        <div class="chip teal">🕐 Daily During Mall Hours</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">SM Cavite Branches</div>
+        <div class="sidebar-count"><span>7</span> drop-off points available</div>
+      </div>
+
+      <!-- Cards injected by JS -->
+      <div id="loc-list"></div>
+    </aside>
+
+    <!-- MAP PANEL -->
+    <div class="map-panel">
+      <div class="map-toolbar">
+        <div>
+          <div class="map-location-name" id="map-title">Select a location</div>
+          <div class="map-location-sub" id="map-sub">Click any branch on the left to view its map</div>
+        </div>
+        <div class="map-actions">
+          <a href="#" class="map-btn ghost" id="btn-directions" target="_blank" rel="noopener">🗺 Get Directions</a>
+          <a href="#" class="map-btn primary" id="btn-gmaps" target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+      </div>
+
+      <div class="map-frame-wrap" id="map-wrap">
+        <!-- iframes inserted by JS -->
+        <div class="map-placeholder" id="map-placeholder">
+          <div class="map-placeholder-icon">📍</div>
+          <p>Select a branch from the list to view its location on the map.</p>
+        </div>
+      </div>
+
+      <div class="detail-bar">
+        <div>
+          <div class="detail-item-label">Bin Location</div>
+          <div class="detail-item-val teal" id="d-bin">—</div>
+        </div>
+        <div>
+          <div class="detail-item-label">Mall Hours</div>
+          <div class="detail-item-val" id="d-hours">—</div>
+        </div>
+        <div>
+          <div class="detail-item-label">Accepted Items</div>
+          <div class="detail-item-val lime" id="d-accept">—</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ACCEPTED ITEMS -->
+  <div class="accept-section">
+    <div class="accept-inner">
+      <div class="accept-title">What can you <span>drop off?</span></div>
+      <div class="accept-grid">
+        <div class="accept-item"><span class="accept-item-icon">📱</span>Old / broken mobile phones</div>
+        <div class="accept-item"><span class="accept-item-icon">🔌</span>Phone chargers & power cords</div>
+        <div class="accept-item"><span class="accept-item-icon">🔋</span>Commercial batteries</div>
+        <div class="accept-item"><span class="accept-item-icon">🎧</span>Earphones & earbuds</div>
+        <div class="accept-item"><span class="accept-item-icon">⌨️</span>Keyboards & small gadgets</div>
+        <div class="accept-item"><span class="accept-item-icon">🖨️</span>Printer ink & toner cartridges</div>
+        <div class="accept-item"><span class="accept-item-icon">🔢</span>Calculators & power banks</div>
+        <div class="accept-item"><span class="accept-item-icon">💻</span>Computer wiring & accessories</div>
+      </div>
+      <p style="margin-top:1rem;font-size:.78rem;color:var(--muted);font-weight:300;">
+        ⚠️ For gadgets larger than the bin (e.g. laptops, monitors), coordinate with the mall administration office.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const locations = [
+      {
+        id: 1,
+        name: "SM City Bacoor",
+        city: "Bacoor",
+        address: "Molino Blvd, Bacoor, Cavite",
+        bin: "Cyberzone Area",
+        hours: "10AM – 9PM daily",
+        mapsQuery: "SM+City+Bacoor,+Molino+Blvd,+Bacoor,+Cavite,+Philippines",
+        embedSrc: "https://www.google.com/maps?q=SM+City+Bacoor+Molino+Blvd+Bacoor+Cavite+Philippines&output=embed",
+        directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=SM+City+Bacoor+Bacoor+Cavite+Philippines"
+      },
+      {
+        id: 2,
+        name: "SM City Dasmariñas",
+        city: "Dasmariñas City",
+        address: "Governor's Drive cor. Aguinaldo Hwy, Brgy. Sampaloc 1, Dasmariñas City, Cavite",
+        bin: "2/F Cyberzone Area",
+        hours: "10AM – 9PM daily",
+        mapsQuery: "SM+City+Dasmarinas+Governors+Drive+Dasmarinas+Cavite+Philippines",
+        embedSrc: "https://www.google.com/maps?q=SM+City+Dasmarinas+Governors+Drive+Dasmarinas+Cavite+Philippines&output=embed",
+        directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=SM+City+Dasmarinas+Dasmari%C3%B1as+Cavite+Philippines"
+      },
+      {
+        id: 3,
+        name: "SM City Molino",
+        city: "Bacoor (Molino)",
+        address: "Molino-Paliparan Rd, Molino IV, Bacoor, Cavite",
+        bin: "Cyberzone Area",
+        hours: "10AM – 9PM daily",
+        mapsQuery: "SM+City+Molino+Molino+Paliparan+Road+Bacoor+Cavite+Philippines",
+        embedSrc: "https://www.google.com/maps?q=SM+City+Molino+Molino+Paliparan+Road+Bacoor+Cavite+Philippines&output=embed",
+        directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=SM+City+Molino+Bacoor+Cavite+Philippines"
+      },
+      {
+        id: 4,
+        name: "SM City Rosario",
+        city: "Rosario",
+        address: "Gen. Trias Drive, Brgy. Tejero, Rosario, Cavite",
+        bin: "Cyberzone Area",
+        hours: "10AM – 9PM daily",
+        mapsQuery: "SM+City+Rosario+General+Trias+Drive+Rosario+Cavite+Philippines",
+        embedSrc: "https://www.google.com/maps?q=SM+City+Rosario+General+Trias+Drive+Rosario+Cavite+Philippines&output=embed",
+        directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=SM+City+Rosario+Rosario+Cavite+Philippines"
+      },
+      {
+        id: 5,
+        name: "SM City Trece Martires",
+        city: "Trece Martires City",
+        address: "Governor's Drive cor. Capital Road, San Agustin, Trece Martires City, Cavite",
+        bin: "Cyberzone Area",
+        hours: "10AM – 9PM daily",
+        mapsQuery: "SM+City+Trece+Martires+Governors+Drive+Trece+Martires+Cavite+Philippines",
+        embedSrc: "https://www.google.com/maps?q=SM+City+Trece+Martires+Governors+Drive+Trece+Martires+Cavite+Philippines&output=embed",
+        directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=SM+City+Trece+Martires+Cavite+Philippines"
+      },
+      {
+        id: 6,
+        name: "SM Center Imus",
+        city: "Imus City",
+        address: "Along NIA Road, Brgy. Alapan IC, Imus City, Cavite",
+        bin: "Cyberzone / Info Kiosk",
+        hours: "11AM – 9PM (Mon–Fri) · 10AM – 9PM (Sat–Sun)",
+        mapsQuery: "SM+Center+Imus+NIA+Road+Imus+Cavite+Philippines",
+        embedSrc: "https://www.google.com/maps?q=SM+Center+Imus+NIA+Road+Imus+City+Cavite+Philippines&output=embed",
+        directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=SM+Center+Imus+Imus+City+Cavite+Philippines"
+      },
+      {
+        id: 7,
+        name: "SM City Tanza",
+        city: "Tanza",
+        address: "Antero Soriano Hwy cor. Dr. Solis St., Daang Amaya 2, Tanza, Cavite",
+        bin: "Cyberzone Area",
+        hours: "10AM – 9PM daily",
+        mapsQuery: "SM+City+Tanza+Antero+Soriano+Highway+Tanza+Cavite+Philippines",
+        embedSrc: "https://www.google.com/maps?q=SM+City+Tanza+Antero+Soriano+Highway+Tanza+Cavite+Philippines&output=embed",
+        directionsUrl: "https://www.google.com/maps/dir/?api=1&destination=SM+City+Tanza+Tanza+Cavite+Philippines"
+      }
+    ];
+
+    let activeId = null;
+
+    // Build sidebar cards
+    const list = document.getElementById('loc-list');
+    locations.forEach(loc => {
+      const card = document.createElement('div');
+      card.className = 'loc-card';
+      card.dataset.id = loc.id;
+      card.innerHTML = `
+        <div class="loc-top">
+          <div class="loc-num">0${loc.id}</div>
+          <div class="loc-info">
+            <div class="loc-name">${loc.name}</div>
+            <div class="loc-city">${loc.city}, Cavite</div>
+            <div class="loc-address">${loc.address}</div>
+            <div class="loc-meta">
+              <span class="loc-tag cyberzone">♻️ Cyberzone</span>
+              <span class="loc-tag ewaste">E-Waste Bin</span>
+            </div>
+            <div class="loc-hours">${loc.hours}</div>
+          </div>
+        </div>
+      `;
+      card.addEventListener('click', () => selectLocation(loc.id));
+      list.appendChild(card);
+
+      // Pre-create iframe (hidden)
+      const iframe = document.createElement('iframe');
+      iframe.id = `map-${loc.id}`;
+      iframe.src = loc.embedSrc;
+      iframe.allowFullscreen = true;
+      iframe.loading = "lazy";
+      iframe.referrerPolicy = "no-referrer-when-downgrade";
+      document.getElementById('map-wrap').appendChild(iframe);
+    });
+
+    function selectLocation(id) {
+      if (activeId === id) return;
+      activeId = id;
+
+      const loc = locations.find(l => l.id === id);
+
+      // Update sidebar
+      document.querySelectorAll('.loc-card').forEach(c => {
+        c.classList.toggle('active', parseInt(c.dataset.id) === id);
+      });
+
+      // Show correct iframe
+      document.querySelectorAll('#map-wrap iframe').forEach(f => f.classList.remove('visible'));
+      document.getElementById(`map-${id}`).classList.add('visible');
+      document.getElementById('map-placeholder').style.display = 'none';
+
+      // Toolbar
+      document.getElementById('map-title').textContent = loc.name;
+      document.getElementById('map-sub').textContent = loc.address;
+      document.getElementById('btn-directions').href = loc.directionsUrl;
+      document.getElementById('btn-gmaps').href = `https://www.google.com/maps/search/?api=1&query=${loc.mapsQuery}`;
+
+      // Detail bar
+      document.getElementById('d-bin').textContent = loc.bin;
+      document.getElementById('d-hours').textContent = loc.hours;
+      document.getElementById('d-accept').textContent = 'Small e-waste items';
+
+      // Scroll card into view on mobile
+      const card = document.querySelector(`.loc-card[data-id="${id}"]`);
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Auto-select first on load
+    selectLocation(1);
+  </script>
+</body>
+</html>
