@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resources — E-Cycle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --lime:   #C8F135;
+      --orange: #FF5C00;
+      --teal:   #00B4A2;
+      --dark:   #0D0F0A;
+      --mid:    #161A12;
+      --panel:  #1B1F16;
+      --smoke:  #F0EDDF;
+      --muted:  #6B7260;
+      --border: rgba(200,241,53,.1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--dark); color: var(--smoke); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1000; opacity: .2;
+    }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 2.5rem;
+      background: rgba(13,15,10,.95);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 500;
+      backdrop-filter: blur(10px);
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: .1em; color: var(--lime); text-decoration: none; }
+    .nav-logo span { color: var(--orange); }
+    .nav-back { display: flex; align-items: center; gap: .5rem; color: var(--muted); text-decoration: none; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; transition: color .2s; }
+    .nav-back:hover { color: var(--lime); }
+    .nav-back::before { content: '←'; }
+
+    .hero-strip {
+      background: var(--mid);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 2.5rem 3rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-strip::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(200,241,53,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(200,241,53,.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-strip::after {
+      content: 'RESOURCES';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 12vw, 10rem);
+      color: rgba(200,241,53,.03);
+      right: -1rem; bottom: -1rem;
+      letter-spacing: .05em; pointer-events: none; line-height: 1;
+    }
+    .hero-strip-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+    .page-eyebrow { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); font-weight: 600; display: flex; align-items: center; gap: .5rem; margin-bottom: .8rem; }
+    .page-eyebrow::before { content: '//'; opacity: .4; }
+    .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1; }
+    .page-title span { color: var(--lime); }
+    .page-sub { margin-top: .9rem; font-size: .95rem; color: var(--muted); font-weight: 300; line-height: 1.7; max-width: 560px; }
+
+    /* FILTER TABS */
+    .filter-bar {
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex; gap: 0;
+      overflow-x: auto;
+    }
+    .filter-btn {
+      background: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .78rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted);
+      padding: 1rem 1.5rem;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { color: var(--smoke); }
+    .filter-btn.active { color: var(--lime); border-bottom-color: var(--lime); }
+
+    /* CONTENT */
+    .content { max-width: 1100px; margin: 0 auto; padding: 3rem 2.5rem 6rem; }
+
+    /* CATEGORY LABEL */
+    .cat-label {
+      font-size: .68rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--teal);
+      font-weight: 600; display: flex; align-items: center; gap: .5rem;
+      margin-bottom: 1.2rem; margin-top: 3rem;
+    }
+    .cat-label:first-child { margin-top: 0; }
+    .cat-label::before { content: '//'; opacity: .4; }
+
+    /* RESOURCE GRID */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1rem;
+      margin-bottom: .5rem;
+    }
+
+    .resource-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      text-decoration: none;
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+      transition: border-color .3s, transform .3s;
+    }
+    .resource-card:hover { border-color: rgba(200,241,53,.3); transform: translateY(-3px); }
+    .resource-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--lime), transparent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .35s ease;
+    }
+    .resource-card:hover::after { transform: scaleX(1); }
+
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: .8rem; margin-bottom: 1rem; }
+    .card-tag {
+      font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+      padding: .25rem .65rem; border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .card-tag.ph    { background: rgba(200,241,53,.1); border: 1px solid rgba(200,241,53,.2); color: var(--lime); }
+    .card-tag.global{ background: rgba(0,180,162,.1);  border: 1px solid rgba(0,180,162,.2);  color: var(--teal); }
+    .card-tag.law   { background: rgba(255,92,0,.1);   border: 1px solid rgba(255,92,0,.2);   color: var(--orange); }
+    .card-tag.research { background: rgba(200,241,53,.07); border: 1px solid rgba(200,241,53,.15); color: #a8c540; }
+
+    .card-arrow { color: var(--muted); font-size: .9rem; transition: color .2s, transform .2s; flex-shrink: 0; }
+    .resource-card:hover .card-arrow { color: var(--lime); transform: translate(2px, -2px); }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: .92rem; font-weight: 700;
+      color: var(--smoke); line-height: 1.35;
+      margin-bottom: .5rem;
+      flex: 1;
+    }
+    .card-desc { font-size: .8rem; color: var(--muted); font-weight: 300; line-height: 1.6; margin-bottom: 1rem; flex: 1; }
+    .card-meta { display: flex; align-items: center; gap: .8rem; margin-top: auto; }
+    .card-source { font-size: .7rem; color: var(--muted); letter-spacing: .06em; }
+    .card-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: .85rem; color: var(--muted);
+      margin-left: auto;
+    }
+
+    /* hidden class for filtering */
+    .resource-card.hidden { display: none; }
+    .cat-group.hidden { display: none; }
+
+    /* disclaimer */
+    .disclaimer {
+      margin-top: 4rem;
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      font-size: .78rem; color: var(--muted);
+      font-weight: 300; line-height: 1.7;
+    }
+    .disclaimer strong { color: var(--smoke); }
+
+    @media (max-width: 700px) {
+      .content { padding: 2.5rem 1.2rem 4rem; }
+      nav { padding: 1rem 1.2rem; }
+      .hero-strip { padding: 2.5rem 1.2rem 2rem; }
+      .filter-bar { padding: 0 1.2rem; }
+      .resource-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">E<span>-</span>Cycle</a>
+    <a href="index.html" class="nav-back">Back to Campaign</a>
+  </nav>
+
+  <div class="hero-strip">
+    <div class="hero-strip-inner">
+      <div class="page-eyebrow">Knowledge Hub</div>
+      <h1 class="page-title">E-Waste <span>Resources</span></h1>
+      <p class="page-sub">A curated collection of articles, reports, and references on e-waste — from Philippine context to global data.</p>
+    </div>
+  </div>
+
+  <!-- FILTER -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All Resources</button>
+    <button class="filter-btn" data-filter="ph">🇵🇭 Philippines</button>
+    <button class="filter-btn" data-filter="global">🌍 Global</button>
+    <button class="filter-btn" data-filter="law">⚖️ Law & Policy</button>
+    <button class="filter-btn" data-filter="research">📄 Research</button>
+  </div>
+
+  <div class="content">
+
+    <!-- PHILIPPINES -->
+    <div class="cat-group" data-cat="ph">
+      <div class="cat-label">Philippines</div>
+      <div class="resource-grid">
+
+        <a class="resource-card" href="https://www.philstar.com/headlines/2024/03/26/2343299/philippines-among-top-e-waste-producers-sea" target="_blank" rel="noopener" data-tags="ph">
+          <div class="card-top">
+            <span class="card-tag ph">Philippines</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-title">Philippines Among Top E-Waste Producers in Southeast Asia</div>
+          <div class="card-desc">Reports that the Philippines generated 537 million kg of e-waste in 2022 — 4.7 kg per capita — making it one of the region's largest contributors according to the UN's Global E-Waste Monitor 2024.</div>
+          <div class="card-meta">
+            <span class="card-source">Philippine Star</span>
+            <span class="card-year">2024</span>
+          </div>
+        </a>
+
+        <a class="resource-card" href="https://bantoxics.org/2024/10/14/iwas-ewaste-infographic/" target="_blank" rel="noopener" data-tags="ph">
+          <div class="card-top">
+            <span class="card-tag ph">Philippines</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-title">IWAS E-WASTE: BAN Toxics Infographic for International E-Waste Day</div>
+          <div class="card-desc">A Tagalog IEC material by toxic watchdog BAN Toxics explaining what e-waste is, the dangers it poses, challenges in the Philippines, and practical tips on how Filipinos can reduce e-waste.</div>
+          <div class="card-meta">
+            <span class="card-source">BAN Toxics</span>
+            <span class="card-year">2024</span>
+          </div>
+        </a>
+
+        <a class="resource-card" href="https://seads.adb.org/articles/transforming-e-waste-wealth" target="_blank" rel="noopener" data-tags="ph">
+          <div class="card-top">
+            <span class="card-tag ph">Philippines</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-title">Transforming E-Waste into Wealth in the Philippines</div>
+          <div class="card-desc">How the Philippines' first community-led e-waste management centers, built under a UNIDO–GEF project, are empowering local communities and creating green jobs from responsible e-waste dismantling.</div>
+          <div class="card-meta">
+            <span class="card-source">ADB SEADS / UNIDO</span>
+            <span class="card-year">2024</span>
+          </div>
+        </a>
+
+        <a class="resource-card" href="https://www.unido.org/news/philippines-making-money-making-e-waste-safe" target="_blank" rel="noopener" data-tags="ph">
+          <div class="card-top">
+            <span class="card-tag ph">Philippines</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-title">The Philippines: Making Money Making E-Waste Safe</div>
+          <div class="card-desc">UNIDO's Director General visits a Philippine treatment, storage and disposal (TSD) facility, highlighting e-waste as a source of precious metals and a platform for green jobs and circular economy practice.</div>
+          <div class="card-meta">
+            <span class="card-source">UNIDO</span>
+            <span class="card-year">2022</span>
+          </div>
+        </a>
+
+        <a class="resource-card" href="https://onlinelibrary.wiley.com/doi/10.1111/ejed.70042" target="_blank" rel="noopener" data-tags="ph research">
+          <div class="card-top">
+            <span class="card-tag ph">Philippines</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-title">E-Waste Management Practices in Selected Public Schools in the Philippines</div>
+          <div class="card-desc">A 2025 qualitative study examining how secondary schools in Sorsogon Province manage e-waste, exploring environmental justice and the role of education in responsible disposal.</div>
+          <div class="card-meta">
+            <span class="card-source">European Journal of Education (Wiley)</span>
+            <span class="card-year">2025</span>
+          </div>
+        </a>
+
+        <a class="resource-card" href="https://atr.vsu.edu.ph/article/view/526" target="_blank" rel="noopener" data-tags="ph research law">
+          <div class="card-top">
+            <span class="card-tag ph">Philippines</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-title">WEEE Management and Policy Frameworks in the Philippines: A Mini Review</div>
+          <div class="card-desc">A 2025 academic review of waste electrical and electronic equipment (WEEE) management policies in the Philippines, covering regulatory gaps, EPR frameworks, and recommendations for local governments.</div>
+          <div class="card-meta">
+            <span class="card-source">Annals of Tropical Research (VSU)</span>
+            <span class="card-year">2025</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- GLOBAL -->
+    <div class="cat-group" data-cat="global">
+      <div class="cat-label">Global Reports & Data</div>
+      <div class="resource-grid">
+
+        <a class="resource-card" href="https://ewastemonitor.info/the-global-e-waste-monitor-2024/" target="_blank" rel="noopener" data-tags="global research">
+          <div class="card-top">
+            <span class="card-tag global">Global</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-title">Global E-Waste Monitor 2024 (ITU / UNITAR)</div>
+          <div class="card-desc">The authoritative UN report on worldwide e-waste generation. Estimates 62 billion kg generated in 2022, with only 22% formally recycled. Includes country-level breakdowns, projections to 2030, and policy recommendations.</div>
+          <div class="card-meta">
+            <span class="card-source">ITU / UNITAR</span>
+            <span class="card-year">2024</span>
+          </div>
+        </a>
+
+        <a class="resource-card" href="https://www.wired.com/story/un-south-east-south-asia-e-waste-environment/" target="_blank" rel="noopener" data-tags="global">
+          <div class="card-top">
+            <span class="card-tag global">Global</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-title">Toxic E-Waste in Asia Jumps 63% in Five Years</div>
+          <div class="card-desc">A WIRED article summarising a UN University report on the dramatic rise of e-waste across South and Southeast Asia, driven by rising incomes, falling device prices, and short product lifespans.</div>
+          <div class="card-meta">
+            <span class="card-source">WIRED / UN University</span>
+            <span class="card-year">2017</span>
+          </div>
+        </a>
+
+        <a class="resource-card" href="https://www.researchgate.net/publication/226646109_E-waste_issues_and_measures_in_the_Philippines" target="_blank" rel="noopener" data-tags="global research ph">
+          <div class="card-top">
+            <span class="card-tag global">Global</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-title">E-Waste Issues and Measures in the Philippines (Springer)</div>
+          <div class="card-desc">A foundational journal paper on the hazardous materials in discarded electronics — lead, mercury, cadmium — and how developing countries like the Philippines face unique challenges in safe disposal and recycling infrastructure.</div>
+          <div class="card-meta">
+            <span class="card-source">Journal of Material Cycles & Waste Mgmt.</span>
+            <span class="card-year">2006</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- LAW & POLICY -->
+    <div class="cat-group" data-cat="law">
+      <div class="cat-label">Law & Policy</div>
+      <div class="resource-grid">
+
+        <a class="resource-card" href="https://emb.gov.ph/wp-content/uploads/2023/02/TSD-as-of-January-31-2023.pdf" target="_blank" rel="noopener" data-tags="law ph">
+          <div class="card-top">
+            <span class="card-tag law">Law & Policy</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-title">DENR-EMB List of Registered TSD Facilities (E-Waste / M506)</div>
+          <div class="card-desc">The official government list of Treatment, Storage, and Disposal (TSD) facilities registered to handle e-waste (M506 waste) in the Philippines, as maintained by the Department of Environment and Natural Resources.</div>
+          <div class="card-meta">
+            <span class="card-source">DENR – Environmental Management Bureau</span>
+            <span class="card-year">2023</span>
+          </div>
+        </a>
+
+        <a class="resource-card" href="https://mb.com.ph/2020/10/13/eco-groups-urge-government-to-ban-importation-of-e-waste" target="_blank" rel="noopener" data-tags="law ph">
+          <div class="card-top">
+            <span class="card-tag law">Law & Policy</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-title">Eco Groups Urge Government to Ban Importation of E-Waste</div>
+          <div class="card-desc">Environmental groups call on the Philippine government to strictly enforce bans on imported e-waste following cases of illegal dumping from Canada, South Korea, Hong Kong, and Australia.</div>
+          <div class="card-meta">
+            <span class="card-source">Manila Bulletin</span>
+            <span class="card-year">2020</span>
+          </div>
+        </a>
+
+        <a class="resource-card" href="https://ejournals.ph/article.php?id=25145" target="_blank" rel="noopener" data-tags="law ph research">
+          <div class="card-top">
+            <span class="card-tag law">Law & Policy</span>
+            <span class="card-arrow">↗</span>
+          </div>
+          <div class="card-title">Toward Sustainable E-Waste Management: Insights from General Santos City</div>
+          <div class="card-desc">A mixed-method study on consumer disposal behaviors in General Santos City using the KAP model, with policy recommendations for local ordinances, EPR frameworks, and Material Recovery Facility integration.</div>
+          <div class="card-meta">
+            <span class="card-source">Philippine EJournals</span>
+            <span class="card-year">2024</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>About these resources:</strong> All links lead to publicly accessible external sources — academic journals, government agencies, news outlets, and UN bodies. E-Cycle does not host or own any of these materials. Links are provided for educational purposes only and were last verified in May 2026.
+    </div>
+
+  </div>
+
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.resource-card');
+    const groups = document.querySelectorAll('.cat-group');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+
+        if (filter === 'all') {
+          cards.forEach(c => c.classList.remove('hidden'));
+          groups.forEach(g => g.classList.remove('hidden'));
+          return;
+        }
+
+        // Show/hide individual cards
+        cards.forEach(card => {
+          const tags = (card.dataset.tags || '').split(' ');
+          card.classList.toggle('hidden', !tags.includes(filter));
+        });
+
+        // Hide empty groups
+        groups.forEach(group => {
+          const visible = group.querySelectorAll('.resource-card:not(.hidden)');
+          group.classList.toggle('hidden', visible.length === 0);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

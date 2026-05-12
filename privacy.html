@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy — E-Cycle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --lime:   #C8F135;
+      --orange: #FF5C00;
+      --teal:   #00B4A2;
+      --dark:   #0D0F0A;
+      --mid:    #161A12;
+      --panel:  #1B1F16;
+      --smoke:  #F0EDDF;
+      --muted:  #6B7260;
+      --border: rgba(200,241,53,.1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--dark); color: var(--smoke); font-family: 'DM Sans', sans-serif; min-height: 100vh; overflow-x: hidden; }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1000; opacity: .2;
+    }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 2.5rem;
+      background: rgba(13,15,10,.95);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 500;
+      backdrop-filter: blur(10px);
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: .1em; color: var(--lime); text-decoration: none; }
+    .nav-logo span { color: var(--orange); }
+    .nav-back { display: flex; align-items: center; gap: .5rem; color: var(--muted); text-decoration: none; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; transition: color .2s; }
+    .nav-back:hover { color: var(--lime); }
+    .nav-back::before { content: '←'; }
+
+    .hero-strip {
+      background: var(--mid);
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 2.5rem 3rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-strip::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(200,241,53,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(200,241,53,.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-strip::after {
+      content: 'PRIVACY';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(6rem, 14vw, 12rem);
+      color: rgba(200,241,53,.03);
+      right: -1rem; bottom: -1rem;
+      letter-spacing: .05em; pointer-events: none; line-height: 1;
+    }
+    .hero-strip-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .page-eyebrow { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); font-weight: 600; display: flex; align-items: center; gap: .5rem; margin-bottom: .8rem; }
+    .page-eyebrow::before { content: '//'; opacity: .4; }
+    .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1; }
+    .page-title span { color: var(--lime); }
+    .page-meta { margin-top: 1rem; font-size: .78rem; color: var(--muted); font-weight: 300; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .page-meta span { display: flex; align-items: center; gap: .35rem; }
+
+    .content { max-width: 760px; margin: 0 auto; padding: 4rem 2.5rem 6rem; }
+
+    /* TL;DR banner */
+    .tldr {
+      background: rgba(200,241,53,.06);
+      border: 1px solid rgba(200,241,53,.2);
+      border-left: 4px solid var(--lime);
+      padding: 1.5rem 1.8rem;
+      margin-bottom: 3.5rem;
+    }
+    .tldr-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem; letter-spacing: .1em;
+      color: var(--lime); margin-bottom: .6rem;
+    }
+    .tldr p { font-size: .9rem; color: var(--smoke); line-height: 1.75; font-weight: 300; }
+    .tldr strong { color: var(--lime); }
+
+    /* Policy sections */
+    .policy-section { margin-bottom: 3rem; }
+    .policy-heading {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--smoke);
+      display: flex; align-items: center; gap: .8rem;
+      margin-bottom: .9rem;
+      padding-bottom: .7rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .policy-heading-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem; color: var(--lime);
+      min-width: 1.5rem;
+    }
+    .policy-body { font-size: .88rem; color: #a8ad9c; line-height: 1.85; font-weight: 300; }
+    .policy-body p { margin-bottom: .8rem; }
+    .policy-body p:last-child { margin-bottom: 0; }
+    .policy-body strong { color: var(--smoke); }
+    .policy-body a { color: var(--teal); text-underline-offset: 3px; }
+    .policy-body a:hover { color: var(--lime); }
+
+    /* status chips */
+    .status-row {
+      display: flex; flex-wrap: wrap; gap: .6rem;
+      margin-top: 1.2rem;
+    }
+    .status-chip {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .35rem .9rem;
+      font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+      border-radius: 2px;
+    }
+    .status-chip.no  { background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.2); color: var(--lime); }
+    .status-chip.yes { background: rgba(0,180,162,.08);  border: 1px solid rgba(0,180,162,.2);  color: var(--teal); }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+    .contact-nudge {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      display: flex; align-items: center; gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .contact-nudge-text { flex: 1; font-size: .85rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
+    .contact-nudge-text strong { color: var(--smoke); }
+    .contact-nudge-link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: var(--lime); color: var(--dark);
+      font-family: 'DM Sans', sans-serif; font-weight: 600;
+      font-size: .78rem; letter-spacing: .07em; text-transform: uppercase;
+      padding: .55rem 1.1rem; text-decoration: none;
+      clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+      transition: background .2s;
+      white-space: nowrap;
+    }
+    .contact-nudge-link:hover { background: var(--orange); color: var(--smoke); }
+
+    @media (max-width: 700px) {
+      .content { padding: 2.5rem 1.2rem 4rem; }
+      nav { padding: 1rem 1.2rem; }
+      .hero-strip { padding: 2.5rem 1.2rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">E<span>-</span>Cycle</a>
+    <a href="index.html" class="nav-back">Back to Campaign</a>
+  </nav>
+
+  <div class="hero-strip">
+    <div class="hero-strip-inner">
+      <div class="page-eyebrow">Legal</div>
+      <h1 class="page-title">Privacy <span>Policy</span></h1>
+      <div class="page-meta">
+        <span>📅 Effective: May 2026</span>
+        <span>🏫 CPE12 — De La Salle University Dasmariñas</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="tldr">
+      <div class="tldr-label">// TL;DR — The Short Version</div>
+      <p>This is a <strong>static student advocacy website</strong>. We do <strong>not collect, store, or share any personal data</strong> about visitors. No accounts, no forms, no tracking cookies, no analytics. You are completely anonymous when browsing this site.</p>
+    </div>
+
+    <div class="policy-section">
+      <div class="policy-heading"><span class="policy-heading-num">01</span> Overview</div>
+      <div class="policy-body">
+        <p>The E-Cycle: Every Spark Matters campaign website ("the Site") is a student-run advocacy project created by Class Section CPE12 of the Computer Engineering program at De La Salle University Dasmariñas. This Privacy Policy explains what information, if any, is collected when you use the Site and how it is handled.</p>
+        <p>By accessing the Site, you acknowledge that you have read and understood this policy.</p>
+      </div>
+    </div>
+
+    <div class="policy-section">
+      <div class="policy-heading"><span class="policy-heading-num">02</span> Data We Collect</div>
+      <div class="policy-body">
+        <p>This Site is <strong>fully static</strong>. It contains no server-side processing, no database, no login system, and no contact or submission forms. As a result:</p>
+        <div class="status-row">
+          <span class="status-chip no">✓ No personal data collected</span>
+          <span class="status-chip no">✓ No cookies set by us</span>
+          <span class="status-chip no">✓ No analytics or tracking</span>
+          <span class="status-chip no">✓ No accounts or logins</span>
+          <span class="status-chip no">✓ No IP address logging</span>
+          <span class="status-chip no">✓ No form submissions stored</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="policy-section">
+      <div class="policy-heading"><span class="policy-heading-num">03</span> Third-Party Services</div>
+      <div class="policy-body">
+        <p>Certain features of the Site load resources from third-party providers. These services operate under their own privacy policies, which we have no control over.</p>
+        <p><strong>Google Fonts</strong> — Typography on this Site is served via Google Fonts (fonts.googleapis.com). Google may log your IP address as part of this request. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+        <p><strong>Google Maps Embed</strong> — The Drop-Off Locator page embeds Google Maps using the free iframe embed. When you view a map, Google may set its own cookies or log your IP address. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+        <p><strong>Facebook</strong> — Links to our Facebook page are provided for your convenience. Clicking these links takes you to Facebook, which is governed by <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener">Meta's Privacy Policy</a>. We do not embed Facebook widgets or pixels on this Site.</p>
+      </div>
+    </div>
+
+    <div class="policy-section">
+      <div class="policy-heading"><span class="policy-heading-num">04</span> External Links</div>
+      <div class="policy-body">
+        <p>The Site contains links to external websites (news articles, academic references, government pages, Google Maps). These sites are not operated by us. Once you leave this Site, we encourage you to review the privacy policy of any external site you visit. We have no responsibility or liability for their content or practices.</p>
+      </div>
+    </div>
+
+    <div class="policy-section">
+      <div class="policy-heading"><span class="policy-heading-num">05</span> Children's Privacy</div>
+      <div class="policy-body">
+        <p>This Site does not knowingly collect any information from children or any other visitors. As no data collection takes place, no age-based restrictions are required. The campaign content is informational and suitable for general audiences.</p>
+      </div>
+    </div>
+
+    <div class="policy-section">
+      <div class="policy-heading"><span class="policy-heading-num">06</span> Changes to This Policy</div>
+      <div class="policy-body">
+        <p>We may update this Privacy Policy if the nature of the Site changes (e.g., if a contact form or analytics tool is added in a future revision). Any changes will be reflected on this page with an updated effective date. We encourage you to review this page periodically.</p>
+        <p>Since no data is collected, there is nothing to delete or request — but if you have concerns, please contact us.</p>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+
+    <div class="contact-nudge">
+      <div class="contact-nudge-text">
+        <strong>Questions about this policy?</strong> Reach out to any member of the CPE12 team — we're happy to clarify anything.
+      </div>
+      <a href="contact.html" class="contact-nudge-link">Contact Us →</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
