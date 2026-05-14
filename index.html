@@ -171,7 +171,7 @@
       </p>
       <div class="cta-actions">
         <a href="dropoff.html" class="btn-primary">⚡ Find a Drop-Off Point</a>
-        <a href="#" class="btn-secondary">📣 Share the Campaign</a>
+        <a href="#" class="btn-secondary" id="shareBtn">📣 Share the Campaign</a>
       </div>
     </div>
   </section>
@@ -252,6 +252,31 @@
       document.getElementById('cookieNotice').style.transform = 'translateY(100%)';
       localStorage.setItem('ecycle_cookie_ok', '1');
     }
+
+    <script>
+  // Share campaign button
+  document.getElementById('shareBtn').addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const url = window.location.href;
+
+    try {
+      await navigator.clipboard.writeText(url);
+
+      const btn = document.getElementById('shareBtn');
+      const originalText = btn.innerHTML;
+
+      btn.innerHTML = '✅ Link Copied!';
+      
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+      }, 2000);
+
+    } catch (err) {
+      alert('Failed to copy link.');
+    }
+  });
+</script>
   </script>
 </body>
 </html>
