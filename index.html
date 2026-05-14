@@ -6,14 +6,8 @@
   <title>E-Cycle: Every Spark Matters</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
-  <!-- Google Analytics GA4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CMH2TP2EKD"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag("js", new Date());
-    gtag("config", "G-CMH2TP2EKD", { anonymize_ip: true });
-  </script>
+  <meta name="ga-id" content="G-CMH2TP2EKD"/>
+  <script src="consent.js" defer></script>
 </head>
 <body>
 
@@ -176,8 +170,8 @@
         Every action — no matter how small — is a spark that lights the way.
       </p>
       <div class="cta-actions">
-        <a href="dropoff.html" class="btn-primary">⚡ Find a Drop-Off Point</a>
-        <a id="copy-btn" class="btn-secondary">📣 Share the Campaign</a>
+        <a href="#" class="btn-primary">⚡ Find a Drop-Off Point</a>
+        <a href="#" class="btn-secondary">📣 Share the Campaign</a>
       </div>
     </div>
   </section>
@@ -213,27 +207,51 @@
         if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
       });
     });
+  </script>
 
-    const copyBtn = document.getElementById('copy-btn');
+  <!-- Cookie Notice -->
+  <div id="cookieNotice" style="
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #1B1F16;
+    border-top: 1px solid rgba(200,241,53,.15);
+    padding: 1rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: .8rem;
+    z-index: 800;
+    transform: translateY(100%);
+    transition: transform .4s ease;
+  ">
+    <p style="margin:0; font-size:.8rem; color:#6B7260; font-weight:300; max-width:680px; line-height:1.6;">
+      🍪 This site uses <strong style="color:#F0EDDF;">Google Analytics</strong> to count anonymous visitor traffic — no personal data is collected.
+      <a href="privacy.html" style="color:#00B4A2; text-underline-offset:3px;">Privacy Policy</a>
+    </p>
+    <button onclick="dismissCookie()" style="
+      background: #C8F135; color: #0D0F0A;
+      border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .75rem; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: .5rem 1.2rem;
+      white-space: nowrap;
+      clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+      transition: background .2s;
+    " onmouseover="this.style.background='#FF5C00';this.style.color='#F0EDDF'" onmouseout="this.style.background='#C8F135';this.style.color='#0D0F0A'">
+      Got it
+    </button>
+  </div>
 
-    copyBtn.addEventListener('click', () => {
-        // Get the current page URL
-        const url = window.location.href;
-
-        // Use the Clipboard API to copy the text
-        navigator.clipboard.writeText(url).then(() => {
-            // Optional: Give the user feedback
-            copyBtn.textContent = "Link Copied!";
-            
-            // Reset the button text after 2 seconds
-            setTimeout(() => {
-                copyBtn.textContent = "📣 Share the Campaign";
-            }, 2000);
-        }).catch(err => {
-            console.error('Failed to copy: ', err);
-        });
-    });
-
+  <script>
+    (function() {
+      if (!localStorage.getItem('ecycle_cookie_ok')) {
+        setTimeout(() => {
+          document.getElementById('cookieNotice').style.transform = 'translateY(0)';
+        }, 1200);
+      }
+    })();
+    function dismissCookie() {
+      document.getElementById('cookieNotice').style.transform = 'translateY(100%)';
+      localStorage.setItem('ecycle_cookie_ok', '1');
+    }
   </script>
 </body>
 </html>
