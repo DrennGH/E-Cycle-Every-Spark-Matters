@@ -163,7 +163,7 @@
       transition: background .25s, transform .2s;
       clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
     }
-    .btn-primary:hover { background: var(--orange); color: var(--smoke); transform: translateY(-2px); }
+    .btn-primary:hover { background: var(--orange); color: var(--smoke); transform: translateY(-2px); cursor: pointer;}
 
     .btn-secondary {
       background: transparent;
@@ -180,7 +180,7 @@
       display: inline-flex; align-items: center; gap: .5rem;
       transition: border-color .25s, color .25s;
     }
-    .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+    .btn-secondary:hover { border-color: var(--teal); color: var(--teal); cursor: pointer;}
 
     /* ── Hero right: big graphic ── */
     .hero-right {
