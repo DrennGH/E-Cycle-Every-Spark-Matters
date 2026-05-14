@@ -153,6 +153,14 @@
       .hero-strip { padding: 2.5rem 1.2rem 2rem; }
     }
   </style>
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag("js", new Date());
+    gtag("config", "G-XXXXXXXXXX", { anonymize_ip: true });
+  </script>
 </head>
 <body>
 
@@ -176,7 +184,7 @@
 
     <div class="tldr">
       <div class="tldr-label">// TL;DR — The Short Version</div>
-      <p>This is a <strong>static student advocacy website</strong>. We do <strong>not collect, store, or share any personal data</strong> about visitors. No accounts, no forms, no tracking cookies, no analytics. You are completely anonymous when browsing this site.</p>
+      <p>This is a <strong>static student advocacy website</strong>. We do <strong>not collect any personally identifiable information</strong>. We use <strong>Google Analytics (GA4)</strong> with IP anonymization enabled to count anonymous visitor traffic — we can see how many people visited and from which country, but never <em>who</em> you are. No accounts, no forms, no personal data stored by us.</p>
     </div>
 
     <div class="policy-section">
@@ -190,14 +198,20 @@
     <div class="policy-section">
       <div class="policy-heading"><span class="policy-heading-num">02</span> Data We Collect</div>
       <div class="policy-body">
-        <p>This Site is <strong>fully static</strong>. It contains no server-side processing, no database, no login system, and no contact or submission forms. As a result:</p>
+        <p>We use <strong>Google Analytics 4 (GA4)</strong> to collect anonymous, aggregated data about how visitors interact with this Site. This helps us understand the reach of the E-Cycle campaign. IP anonymization is enabled, meaning your full IP address is never stored. The data collected includes:</p>
         <div class="status-row">
-          <span class="status-chip no">✓ No personal data collected</span>
-          <span class="status-chip no">✓ No cookies set by us</span>
-          <span class="status-chip no">✓ No analytics or tracking</span>
-          <span class="status-chip no">✓ No accounts or logins</span>
-          <span class="status-chip no">✓ No IP address logging</span>
-          <span class="status-chip no">✓ No form submissions stored</span>
+          <span class="status-chip yes">📊 Anonymous page views & visit counts</span>
+          <span class="status-chip yes">🌍 Approximate country / city (not exact)</span>
+          <span class="status-chip yes">📱 Device type, browser & OS</span>
+          <span class="status-chip yes">🔗 Referral source (how you found the site)</span>
+        </div>
+        <p style="margin-top:1rem;">The following are <strong>never</strong> collected by us:</p>
+        <div class="status-row">
+          <span class="status-chip no">✗ No names or email addresses</span>
+          <span class="status-chip no">✗ No full IP addresses (anonymized)</span>
+          <span class="status-chip no">✗ No login or account data</span>
+          <span class="status-chip no">✗ No form submissions stored</span>
+          <span class="status-chip no">✗ No payment or sensitive data</span>
         </div>
       </div>
     </div>
@@ -206,6 +220,7 @@
       <div class="policy-heading"><span class="policy-heading-num">03</span> Third-Party Services</div>
       <div class="policy-body">
         <p>Certain features of the Site load resources from third-party providers. These services operate under their own privacy policies, which we have no control over.</p>
+        <p><strong>Google Analytics (GA4)</strong> — We use GA4 to anonymously track visitor counts and behavior. Google may set cookies (such as <code>_ga</code>) on your device to distinguish visitors. IP anonymization is enabled. You can opt out via the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
         <p><strong>Google Fonts</strong> — Typography on this Site is served via Google Fonts (fonts.googleapis.com). Google may log your IP address as part of this request. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
         <p><strong>Google Maps Embed</strong> — The Drop-Off Locator page embeds Google Maps using the free iframe embed. When you view a map, Google may set its own cookies or log your IP address. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
         <p><strong>Facebook</strong> — Links to our Facebook page are provided for your convenience. Clicking these links takes you to Facebook, which is governed by <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener">Meta's Privacy Policy</a>. We do not embed Facebook widgets or pixels on this Site.</p>
@@ -222,15 +237,15 @@
     <div class="policy-section">
       <div class="policy-heading"><span class="policy-heading-num">05</span> Children's Privacy</div>
       <div class="policy-body">
-        <p>This Site does not knowingly collect any information from children or any other visitors. As no data collection takes place, no age-based restrictions are required. The campaign content is informational and suitable for general audiences.</p>
+        <p>This Site does not knowingly collect any personally identifiable information from any visitors, including children. The anonymous analytics data collected via GA4 contains no personal identifiers. The campaign content is informational and suitable for general audiences.</p>
       </div>
     </div>
 
     <div class="policy-section">
       <div class="policy-heading"><span class="policy-heading-num">06</span> Changes to This Policy</div>
       <div class="policy-body">
-        <p>We may update this Privacy Policy if the nature of the Site changes (e.g., if a contact form or analytics tool is added in a future revision). Any changes will be reflected on this page with an updated effective date. We encourage you to review this page periodically.</p>
-        <p>Since no data is collected, there is nothing to delete or request — but if you have concerns, please contact us.</p>
+        <p>We may update this Privacy Policy as the Site evolves. Any changes will be reflected on this page with an updated effective date. We encourage you to review this page periodically.</p>
+        <p>Since we only collect anonymous, aggregated analytics data, there is no personally identifiable information to delete or request. If you have concerns about data collected by Google Analytics, you may use the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Add-on</a>.</p>
       </div>
     </div>
 
